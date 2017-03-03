@@ -3,6 +3,7 @@
 set -e -x
 
 pushd source-code
+ls -al
   ./mvnw clean package
 popd
 
