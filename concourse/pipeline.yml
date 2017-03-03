@@ -23,15 +23,19 @@ jobs:
     - task: package
       privileged: true
       file: source-code/concourse/tasks/package.yml
-
-  - name: job-deploy-app
-    serial: true
-    plan:
-    - get: source-code
-      trigger: true
-      passed: [package]
     - put: resource-deploy-demo-app
       params:
         manifest: source-code/manifest.yml
         path: build-output/demo*-SNAPSHOT.jar
-      
+    
+
+#  - name: job-deploy-app
+#    serial: true
+#    plan:
+#    - get: source-code
+#      trigger: true
+#      passed: [package]
+#    - put: resource-deploy-demo-app
+#      params:
+#        manifest: source-code/manifest.yml
+#        path: build-output/demo*-SNAPSHOT.jar
