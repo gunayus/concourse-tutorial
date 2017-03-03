@@ -4,4 +4,3 @@ applications:
   memory: 1G
   random-route: true
   path: target/demo-0.0.1-SNAPSHOT.jar
-  services:
