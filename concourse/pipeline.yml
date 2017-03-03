@@ -5,6 +5,16 @@ resources:
   source:
     uri: https://github.com/gunayus/concourse-tutorial.git
 
+- name: resource-deploy-demo-app
+  type: cf
+  source:
+    api: {{cf-api}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    organization: {{cf-organization}}
+    space: {{cf-space}}
+    skip_cert_check: true
+
 jobs:
   - name: package
     plan:
@@ -13,3 +23,13 @@ jobs:
     - task: package
       privileged: true
       file: source-code/concourse/tasks/package.yml
+
+  - name: job-deploy-app
+    serial: true
+    plan:
+    - {get: source-code, trigger: true}
+    - put: resource-deploy-demo-app
+      params:
+        manifest: source-code/manifest.yml
+        path: source-code
+      
