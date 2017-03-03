@@ -27,7 +27,9 @@ jobs:
   - name: job-deploy-app
     serial: true
     plan:
-    - {get: source-code, trigger: true}
+    - get: source-code
+      trigger: true
+      passed: [package]
     - put: resource-deploy-demo-app
       params:
         manifest: source-code/manifest.yml
