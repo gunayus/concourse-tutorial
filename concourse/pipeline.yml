@@ -33,5 +33,5 @@ jobs:
     - put: resource-deploy-demo-app
       params:
         manifest: source-code/manifest.yml
-        path: source-code
+        path: build-output/demo*-SNAPSHOT.jar
       
